@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh """
                     . venv/bin/activate
-                    pytest --junitxml=results.xml
+                    pytest --junitxml=results.xml --log-cli-level=INFO
                 """
             }
         }
