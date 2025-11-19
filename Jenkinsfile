@@ -17,7 +17,10 @@ pipeline {
             steps {
                 sh """
                     . venv/bin/activate
+                    # Ejecuta tests y genera XML para Jenkins
                     pytest --junitxml=results.xml --log-cli-level=INFO
+                    # Genera el reporte HTML con pytest-html
+                    pytest --html=report.html --self-contained-html
                 """
             }
         }
@@ -25,7 +28,16 @@ pipeline {
 
     post {
         always {
+            
             junit 'results.xml'
+
+        
+            publishHTML([allowMissing: false,
+                         alwaysLinkToLastBuild: true,
+                         keepAll: true,
+                         reportDir: '.',          
+                         reportFiles: 'report.html',
+                         reportName: 'Test Report'])
         }
     }
 }
