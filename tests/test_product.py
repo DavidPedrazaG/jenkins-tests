@@ -7,7 +7,7 @@ client = TestClient(app)
 logging.basicConfig(level=logging.INFO)
 
 def test_create_product():
-    res = client.post("/products", json={"name": "X", "price": 10})
+    res = client.post("/products", json={"name": "X", "price": -10})
     assert res.status_code == 200
     logging.info("✅ test_create_product successful")
 
