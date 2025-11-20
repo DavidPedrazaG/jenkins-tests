@@ -7,7 +7,7 @@ client = TestClient(app)
 logging.basicConfig(level=logging.INFO)
 
 def test_create_category():
-    res = client.post("/categories", json={"name": "Tech"})
+    res = client.post("/categories", json={"name": 0})
     assert res.status_code == 200, "failed"
     logging.info("✅ test_create_category successful")
 
